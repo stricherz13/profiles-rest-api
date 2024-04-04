@@ -2,7 +2,7 @@ from rest_framework.response import Response
 from rest_framework.status import HTTP_400_BAD_REQUEST
 from rest_framework.views import APIView
 from rest_framework.authentication import TokenAuthentication
-from rest_framework import viewsets
+from rest_framework import viewsets, filters
 
 from profiles_api import serializers, permission, models
 
@@ -101,5 +101,5 @@ class UserProfileViewSet(viewsets.ModelViewSet):
     queryset = models.UserProfile.objects.all()
     authentication_classes = (TokenAuthentication,)
     permission_classes = (permission.updateOwnProfile,)
-    # filter_backends = (filters.SearchFilter,)
+    filter_backends = (filters.SearchFilter,)
     search_fields = ('name', 'email',)
